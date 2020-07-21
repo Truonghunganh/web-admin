@@ -1,0 +1,243 @@
+@import 'styles/variables.scss';
+
+/*! HTML5 Boilerplate v5.3.0 | MIT License | https://html5boilerplate.com/ */
+
+/*
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+
+
+   
+   /*@import 'https://fonts.googleapis.com/css?family=Fira+Sans:400,400i,700,700i';*/
+   @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
+   @import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i');
+   
+   /* define color */
+   
+   .blue-dark {
+       color: #00397f;
+   }
+   .blue-primary {
+       color: #1057a5;
+   }
+   .blue-light {
+       color: #2d80d9;
+   }
+   .red-dark {
+       color: #bb0000;
+   }
+   .red-primary {
+       color: #da1919;
+   }
+   .red-light {
+       color: #f2373e;
+   }
+   .yellow-dark {
+       color: #d87900;
+   }
+   .yellow-primary {
+       color: #ff9f19;
+   }
+   .yellow-light {
+       color: #ffbf3d;
+   }
+   .green-dark {
+       color: #038073;
+   }
+   .green-primary {
+       color: #00ab9a;
+   }
+   .green-light {
+       color: #3dccbe;
+   }
+   .grey-dark {
+       color: #222222;
+   }
+   .grey-primary {
+       color: #555555;
+   }
+   .grey-light {
+       color: #888888;
+   }
+   .grey-lighter {
+       color: #bbbbbb;
+   }
+   
+   .bg-yellow {
+       background-color: #ffeea8!important;
+   }
+   .bg-yellow-wash {
+       background-color: #FFF9E2!important;
+   }
+   .bg-green {
+       background-color: #aaf7a2!important;
+   }
+   .bg-green-wash {
+       background-color: #ddf6da!important;
+   }
+   .bg-red {
+       background-color: #fea7ac!important;
+   }
+   .bg-red-wash {
+       background-color: #fee1e3!important;
+   }
+   .bg-blue {
+       background-color: #b5a9f1!important;
+   }
+   .bg-blue-wash {
+       background-color: #dbd7ef!important;
+   }
+   .bg-grey-wash {
+       background-color: #d2cecf!important;
+   }
+   .bg-olive {
+       background-color: #788677!important;
+       color: #ffffff!important;
+   }
+   
+   .icon-delete {
+    position: absolute;
+    bottom: 0;
+    right: 16px;
+    font-size: 18px;
+}
+    .icon-delete:hover {
+        color: rgb(66, 88, 95);
+    }
+
+   
+   .offer-vendor,
+   .feed-list>li>a {
+       display: block;
+       text-decoration: none;
+       color: #222222;
+       background: #ffffff;
+       padding: 5px 10px;
+       border-top: 5px solid #1057a5;
+       line-height: 1.3;
+       -webkit-box-shadow: 0px 1px 6px -1px rgba(0,0,0,0.75);
+       -moz-box-shadow: 0px 1px 6px -1px rgba(0,0,0,0.75);
+       box-shadow: 0px 1px 6px -1px rgba(0,0,0,0.75);
+   }
+   .offer-vendor:hover,
+   .feed-list>li>a:hover {
+       border-top-color: #e69900;
+   }
+   .feed-list p,
+   .feed-list h6 {
+       margin: 0;
+       white-space: nowrap;
+       text-overflow: ellipsis;
+       overflow: hidden;
+   }
+   .feed-list p {
+       font-style: italic;
+   }
+   
+   .feed-list .data-list {
+       margin: 0;
+   }
+   .feed-list .data-list:after {
+       content: ' ';
+       clear: both;
+       display: block;
+       overflow: hidden;
+       height: 0;
+   }
+   .feed-list .data-list>dt {
+       clear: both;
+       float: left;
+       margin-right: 10px;
+       color: #777777;
+       width: 80px;
+       position: relative;
+   }
+   .feed-list .data-list>dt:after {
+       content: ':';
+       display: inline;
+       position: absolute;
+       right: 0;
+   }
+   .feed-list .data-list>dd {
+       white-space: nowrap;
+       text-overflow: ellipsis;
+       overflow: hidden;
+       margin: 0;
+   }
+   .feed-list .data-list>dd:after {
+       content: ' ';
+       display: inline-block;
+   }
+   
+   .feed-list>li.approve>a{
+       border-top-color: #da1919;
+   }
+   .feed-list>li.approve.timelimit>a{
+       border-top-color: #f20000;
+       background-color: #FFEAEA;
+       /*color: #ffffff;*/
+   }
+   .feed-list>li.approve.timelimit>a:hover{
+       border-top-color: #2d80d9;
+   }
+ 
+ 
+   .list_notification>ul {
+       padding: 0;
+       width: 100%;
+       -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+       box-sizing: border-box;
+   }
+   
+   .feed-list.dashboard{
+       width: 100%;
+   }
+   
+   .feed-list header {
+       position: relative;
+       overflow: hidden;
+   }
+   .feed-list header:after {
+       clear: both;
+       content: '.';
+       display: block;
+       height: 0;
+       visibility: hidden;
+   }
+   .feed-list header>h6 {
+       float: left;
+       max-width: 500px;
+   }
+   .feed-list header>p {
+       float: right;
+       line-height: 1.4;
+   }
+   .feed-list section {
+       padding: 0;
+   }
+   .feed-list aside {
+       min-width: 300px;
+   }
+   
+   .offer-vendor {
+       cursor: pointer;
+   }
+
+   .pd {
+       margin-right: 8px!important;
+   }
+   .pd-li {
+       padding-bottom: 10px;
+   }
+
+   .btn {
+    width: 150px !important;
+  }
+

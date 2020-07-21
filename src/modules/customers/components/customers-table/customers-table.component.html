@@ -1,0 +1,71 @@
+<input type="checkbox" (click)="trangthai()" id="switch1" checked/><label id="status" class="text-top" for="switch1"></label>
+                          
+<sb-card>
+  <div class="card-header"><fa-icon class="mr-1" [icon]='["fas", "table"]'></fa-icon>List all customers</div>
+  <div class="card-body"> 
+    <div *ngIf="customers$ | async; then display else loading"> </div>
+    <ng-template #display>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col" sbSortable="area" (sort)="onSort($event)"><span>Avatar</span></th>
+                    <th scope="col" sbSortable="area" (sort)="onSort($event)"><span>FullName</span></th>
+                    <th scope="col" sbSortable="area" (sort)="onSort($event)"><span>Phone</span></th>
+                    <th scope="col" sbSortable="area" (sort)="onSort($event)"><span>Birthday</span></th>
+                    <th scope="col" sbSortable="area" (sort)="onSort($event)"><span>Status</span></th>
+                    <th scope="col" sbSortable="name" (sort)="onSort($event)"><span>Customer order count</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let customer of customers$ | async">
+                    <th scope="row">{{customer.id }}</th>
+                    <div *ngIf="customer.avatar">
+                      <td><img src="{{url + '/' + customer.avatar.url}}" class="image-avatar-list"></td>
+                  </div>
+                  <div *ngIf="!customer.avatar">
+                  <td><img src="../../../../assets/img/avatar.jpg" class="image-avatar-list"></td>
+                  </div>
+                    <td>{{customer.full_name}}</td>
+                    <th>{{customer.phone}}</th>
+                    <td>{{customer.birthday | date: 'dd/mm/yyyy'}}</td>
+                      <div *ngIf="customer.status == 1; then displayStatus; else noStatus"></div>
+                      <ng-template #displayStatus>
+                          <td>
+                              <input type="checkbox" disabled="true" id="switch" checked/><label id="status" class="text-top" for="switch"></label>
+                          </td>
+                      </ng-template>
+                      <ng-template #noStatus>
+                          <td>
+                              <input type="checkbox" disabled="true" id="switch"/><label id="status" class="text-top" for="switch"></label>
+                          </td>
+                      </ng-template>
+                      <td><strong>{{customer.customer_orders_count}}</strong></td>
+
+            </tbody>
+        </table>
+        <div class="row" >
+            <div class="col-sm-0">
+                <button (click)="previousPage()">Previous</button>
+            </div>
+            <div><h3>{{page}}</h3></div>
+            <div class="col-sm-0 text-right">
+                <button (click)="nextPage()">Next</button>
+            </div>
+        </div>
+    
+<!-- 
+                <div class="d-flex justify-content-center">
+              <ngb-pagination [collectionSize]="pageSize*(customers$ | async).pagination['total_page']" [(page)]="page" size="sm" [pageSize]="pageSize" (pageChange)="onPageChange(page)"></ngb-pagination>
+            </div>
+         -->
+        </ng-template>
+        <ng-template #loading>
+            <div class="spinner">
+                <div class="ball-1"></div>
+                <div class="ball-2"></div>
+            </div>
+        </ng-template>
+
+    </div>
+</sb-card>

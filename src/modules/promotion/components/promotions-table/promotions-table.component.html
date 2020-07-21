@@ -1,0 +1,52 @@
+<sb-card>
+    <div class="card-header"><fa-icon class="mr-1" [icon]='["fas", "table"]'></fa-icon>List all promotions</div>
+    <div class="card-body"> 
+            <div *ngIf="promotions$ | async; then display else loading"> </div>
+            <ng-template #display>
+                <table class="table table-striped"> 
+                    <thead>
+                        <tr> 
+                            <th scope="col" style="text-align:center" sbSortable="name" (sort)="onSort($event)"><span>Id</span></th>
+                            <th scope="col" style="text-align:center" sbSortable="name" (sort)="onSort($event)"><span>Name</span></th>
+                            <th scope="col" style="text-align:center" sbSortable="area" (sort)="onSort($event)"><span>Start Date</span></th>
+                            <th scope="col" style="text-align:center" sbSortable="area" (sort)="onSort($event)"><span>End Date</span></th>
+                            <th scope="col" style="text-align:center" sbSortable="area" (sort)="onSort($event)"><span>Discount</span></th>
+                            <th scope="col" style="text-align:center" sbSortable="area" (sort)="onSort($event)"><span>User Count</span></th>
+                        
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let promotion of promotions$ | async">
+                            <th scope="row" style="text-align:center">{{promotion.id }}</th>
+                            <td scope="row" style="text-align:center" >{{promotion.name}}</td>
+                            <td scope="row" style="text-align:center">{{promotion.start_date}}</td>
+                            <td scope="row" style="text-align:center">{{promotion.end_date}}</td>
+                            <td scope="row" style="text-align:center">{{promotion.discount}}</td>
+                            <td scope="row" style="text-align:center">{{promotion.users_count}}</td>
+                          
+                          
+                    </tbody>
+                </table>
+                <div class="row" >
+                    <div class="col-sm-0">
+                        <button (click)="previousPage()">Previous</button>
+                    </div>
+                    <div><h3>{{page}}</h3></div>
+                    <div class="col-sm-0 text-right">
+                        <button (click)="nextPage()">Next</button>
+                    </div>
+                </div>
+            
+                <!-- <div class="d-flex justify-content-center">
+                    <ngb-pagination  [(page)]="page" size="sm" [pageSize]="pageSize" (pageChange)="onPageChange(page)">{{page}}</ngb-pagination>
+                    <ngb-pagination [collectionSize]="pageSize*(promotions$ | async).pagination['total_page']" [(page)]="page" size="sm" [pageSize]="pageSize" (pageChange)="onPageChange(page)"></ngb-pagination>
+                </div> -->
+            </ng-template>
+            <ng-template #loading>
+                <div class="spinner">
+                    <div class="ball-1"></div>
+                    <div class="ball-2"></div>
+                </div>
+            </ng-template>
+    </div>
+</sb-card>

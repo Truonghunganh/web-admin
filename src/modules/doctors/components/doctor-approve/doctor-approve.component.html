@@ -1,0 +1,42 @@
+<sb-card>
+  <div class="card-body">
+    <div *ngIf="doctorApproves$ | async; then display; else loading"></div>
+    <ng-template #display>
+      <div class="col">
+        <div class="row">
+          <div class="col-lg-2"><strong>New doctor</strong>
+          </div>
+          <div class="col-lg-10">
+            <ul class="layout-grid feed-list dashboard">
+              <li class="pd-li" *ngFor="let doctor of (doctorApproves$ | async).users">
+                <div class="offer-vendor" rlie="button" tabindex="0" aria-hidden="false">
+                  <ol>
+                    <li class="mg-btn">Fullname:  <strong >{{doctor.full_name}}</strong></li>
+                    <li class="mg-btn">Birthday:  <strong >{{doctor.birthday}}</strong></li>
+                    <li class="mg-btn">Address:  <strong >
+                      <fa-icon class="mr-1" [icon]='["fas", "map-marker-alt"]'></fa-icon>
+                      <span>{{doctor.doctor_info.address}}</span></strong>
+                    </li>
+                    <li class="mg-btn">Phone:  <strong >{{doctor.phone}}</strong></li>
+                  </ol>
+                  
+                  <div>
+                    <button type="button" class="btn btn-info m-lg-3" routerLink="{{'/doctors/approve-detail/' + doctor.id}}">Detail</button>
+                    <button type="button" class="btn btn-danger">Reject</button>
+                  </div>
+                </div>  
+              </li>
+            </ul>
+          </div>
+        </div>
+  
+      </div>
+    </ng-template>
+    <ng-template #loading>
+      <div class="spinner">
+          <div class="ball-1"></div>
+          <div class="ball-2"></div>
+      </div>
+  </ng-template>
+  </div>
+</sb-card>

@@ -1,0 +1,37 @@
+<sb-card>
+    <div class="card-header"><fa-icon class="mr-1" [icon]='["fas", "table"]'></fa-icon>Top 10 list most service orders</div>
+    <div class="card-body"> 
+        <div *ngIf="topServices$ | async; then display; else loading"> </div>
+        <ng-template #display>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col" sbSortable="name" (sort)="onSort($event)"><span>Name</span></th>
+                        <th scope="col" sbSortable="area" (sort)="onSort($event)"><span>Description</span></th>
+                        <th scope="col" sbSortable="area" (sort)="onSort($event)"><span>Price</span></th>
+                        <th scope="col" sbSortable="area" (sort)="onSort($event)"><span>Image</span></th>
+                        <th scope="col" sbSortable="area" (sort)="onSort($event)"><span>Total Orders</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let service of topServices$ | async">
+                        <th scope="row">{{ service.id }}</th>
+                        <td>{{service.name}}</td>
+                        <td>{{service.description}}</td>
+                        <td>{{service.price| currency}}</td>
+                        <td><img src="{{url + '/' + service.image.url}}" class="image"></td>
+                        <td>{{service["orders_count"]}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </ng-template>
+        <ng-template #loading>
+            <div class="spinner">
+                <div class="ball-1"></div>
+                <div class="ball-2"></div>
+            </div>
+        </ng-template>
+       
+    </div>
+</sb-card>

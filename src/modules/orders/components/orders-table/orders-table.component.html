@@ -1,0 +1,116 @@
+<sb-card>
+  <div class="card-header">
+    <div class="row">
+        <label class="col-sm-4"><fa-icon class="mr-1" [icon]='["fas", "table"]'></fa-icon>List all orders</label>
+        <div class="row col-sm-4">
+          <form [formGroup]="filterForm" (ngSubmit)="onSubmit()">
+            <div class="form-group form-inline">Service: <input class="form-control ml-2" type="text" formControlName="text" placeholder="Enter name service..." ></div>
+          </form>
+        </div> 
+        <div class="row col-sm-4">
+          <form [formGroup]="selectForm">
+            <div class="form-group form-inline">Filter status:  
+              <select formControlName="selectStatus" class="browser-default custom-select" (change)="onChangeStatus($event.target.value)">
+                <option [selected]="true">Open this select status</option>
+                <option value="1">Pending</option>
+                <option value="2">Confirmed</option>
+                <option value="3">Customer-Cancel</option>
+                <option value="4">Doctor-Cancel</option>
+                <option value="5">Processing</option>
+                <option value="6">Done</option>
+              </select>
+            </div>
+          </form>
+        </div>    
+    </div>
+  </div>
+
+  <div class="card-body">   
+ 
+    <div *ngIf="orders$ | async; then display; else loading"></div>
+    <ng-template #display>
+      <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col" sbSortable="name" (sort)="onSort($event)"><span>Customer</span></th>
+                <th scope="col" sbSortable="area" (sort)="onSort($event)"><span>Doctor</span></th>
+                <th scope="col" sbSortable="area" (sort)="onSort($event)"><span>Service</span></th>
+                <th scope="col" sbSortable="area" (sort)="onSort($event)"><span>StartTime</span></th>
+                <th scope="col" sbSortable="area" (sort)="onSort($event)"><span>EndTime</span></th>
+                <th scope="col" sbSortable="area" (sort)="onSort($event)"><span>Total</span></th>
+                <th scope="col" sbSortable="area" (sort)="onSort($event)"><span>Status</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let order of (orders$ | async).orders" (click)="navigaDetail(order.id)" class="item-order">
+                <td scope="row">{{ order.id }}</td>
+                <th style="color: rgb(50, 47, 85);">{{order.customer.full_name}}</th>
+                <div *ngIf="order.doctor; then haveDoctor; else noDoctor"></div>
+                  <ng-template #haveDoctor>
+                    <th style="color: rgb(50, 47, 85);">{{order.doctor.full_name}}</th>
+                  </ng-template>
+                  <ng-template #noDoctor>
+                    <th style="color: rgb(207, 180, 26);">NULL</th>
+                  </ng-template>
+                <td>{{order.service.name}}</td>
+                <td>{{order.start_time |  date:'short'}}</td>
+                <div *ngIf="order.end_time; then haveEndTime; else noEndTime"></div>
+                  <ng-template #haveEndTime>
+                    <td>{{order.end_time |  date:'short'}}</td>
+                  </ng-template>
+                  <ng-template #noEndTime>
+                    <td>NULL</td>
+                  </ng-template>
+                <th>{{order.total| currency}}</th>
+                <div [ngSwitch]="order.status">
+                  <div *ngSwitchCase="1"> 
+                    <td>
+                      <span class="badge badge-success">Pending</span>
+                    </td>
+                  </div>
+                  <div *ngSwitchCase="2"> 
+                    <td>
+                      <span class="badge badge-primary">Confirmed</span>
+                    </td>
+                  </div>
+                  <div *ngSwitchCase="3"> 
+                    <td>
+                      <span class="badge badge-warning">Customer-Cancel</span>
+                    </td>
+                  </div>
+                  <div *ngSwitchCase="4"> 
+                    <td>
+                      <span class="badge badge-danger">Doctor-Cancel</span>
+                    </td>
+                  </div>
+                  <div *ngSwitchCase="5"> 
+                    <td>
+                      <span class="badge badge-secondary">Processing</span>
+                    </td>
+                  </div>
+                  <div *ngSwitchCase="6"> 
+                    <td>
+                      <span class="badge badge-success">Done</span>
+                    </td>
+                  </div>
+                  
+                </div>
+            </tr>
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-center">
+        <ngb-pagination [collectionSize]="pageSize*(orders$ | async).pagination['total_page']" [(page)]="page" size="sm" [pageSize]="pageSize" (pageChange)="onPageChange(page)"></ngb-pagination>
+    </div>
+    </ng-template>
+    <ng-template #loading>
+      <div class="spinner">
+        <div class="ball-1"></div>
+        <div class="ball-2"></div>
+    </div>
+    </ng-template>
+    
+       
+    </div>
+</sb-card>
+

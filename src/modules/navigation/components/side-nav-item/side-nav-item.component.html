@@ -1,0 +1,7 @@
+<a  class="nav-link" [routerLink]="sideNavItem.link">
+    <div class="sb-nav-link-icon" *ngIf="sideNavItem.icon">
+        <fa-icon [icon]='["fas", sideNavItem.icon]'></fa-icon>
+    </div>
+    {{sideNavItem.text}}
+</a>
+        

@@ -1,0 +1,26 @@
+<sb-card>
+  <div class="card-body">
+    <div *ngIf="permissions$ | async; then display; else loading">
+    </div>
+    <ng-template #display>
+        <div class="row">
+          <div class="col-md-4 pd-checkbox" *ngFor="let permission of permissions$ | async" >
+            <label class="customer-checkbox">{{permission.description}}
+              <input (change)="onChange(permission.id, $event.target.checked)" type="checkbox">
+              <span class="checkmark"></span>
+            </label>
+          </div>
+        </div>
+        <div class="text-center" >
+          <button class="btn btn-work mg-btn" routerLink="/permission-customer">Back</button>
+          <button class="btn btn-work mg-btn" (click)="submitChange()">Submit Change</button>
+        </div>
+    </ng-template>
+    <ng-template #loading>
+      <div class="spinner">
+          <div class="ball-1"></div>
+          <div class="ball-2"></div>
+      </div>
+    </ng-template>
+  </div>
+</sb-card>

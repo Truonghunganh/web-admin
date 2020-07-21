@@ -1,0 +1,383 @@
+.icon {
+  color:#343a40;
+  font-size: 20px;
+}
+
+.icon:hover {
+  color:#2466a8;
+}
+
+.add-icon { 
+  font-size: 40px;
+}
+
+.btn-add { 
+  position: absolute;
+  right: 1em;
+}
+
+.select { 
+  text-align: right;
+}
+
+.content-between {
+  text-align: center!important;
+}
+
+.margin-button {
+  margin-right:10px !important;
+}
+
+.image {
+  width:70px;
+  height: 70px;
+}
+
+.image-avatar-list {
+  width:90px;
+  height: 90px;
+  border-radius: 50%
+}
+
+.margin-bottom-div {
+  margin-bottom: 20px !important;
+}
+
+.spinner {
+  height: 40px;
+  width: 40px;
+  position: relative;
+  margin: 100px auto;
+}
+.ball-1,
+.ball-2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #333333;
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: bounce 2s infinite ease-in-out;
+}
+.ball-2 {
+  animation-delay: -1s;
+}
+@keyframes bounce{
+    0%, 100%{
+      transform: scale(0)
+    }
+    50%{
+        transform: scale(1)
+    }
+}
+
+.icon-profile { 
+  text-align: start;
+}
+
+
+input[type=checkbox]{
+	height: 0;
+	width: 0;
+	visibility: hidden;
+}
+
+#status {
+	cursor: pointer;
+	text-indent: -9999px;
+	width: 2.5em;
+	height: 1.5em;
+	background: grey;
+	display: block;
+	border-radius: 100px;
+	position: relative;
+}
+
+#status:after {
+	content: '';
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	width: 0.9em;
+	height: 0.9em;
+	background: #fff;
+	border-radius: 90px;
+	transition: 0.3s;
+}
+
+input:checked + #status {
+	background: #227CCB;
+}
+
+input:checked + #status:after {
+	left: calc(100% - 5px);
+	transform: translateX(-100%);
+}
+
+.text-top {
+  padding-top: 0px !important;
+}
+
+.card-body {
+  font-size: 0.85em !important;
+  font-family: sans !important;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+  color: #000;
+}
+
+.student-profile .card {
+  border-radius: 10px;
+}
+
+.student-profile .card .card-header .profile_img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  margin: 5px auto;
+  border: 10px solid #ccc;
+  border-radius: 50%;
+}
+
+.student-profile .card h3 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.student-profile .card p {
+  font-size: 16px;
+  color: #000;
+}
+
+.student-profile .table th,
+.student-profile .table td {
+  font-size: 14px;
+  padding: 5px 10px;
+  color: #000;
+}
+
+
+.cycle-tab-container {
+  margin: 30px auto;
+  width: 800px;
+  padding: 20px;
+  box-shadow: 0 0 10px 2px #ddd;
+}
+
+.cycle-tab-container a {
+  color: #173649;
+  font-size: 16px;
+  font-family: roboto;
+  text-align: center;
+}
+
+.tab-pane {
+    text-align: center;
+    height: 100px !important;
+    margin: 20px;
+    width: auto;
+    max-width: 100%;
+}
+
+.fade {
+  opacity: 0;
+  transition: opacity 4s ease-in-out;
+}
+
+.fade.active {
+  opacity: 1;
+}
+
+.cycle-tab-item {
+  width: 180px;
+}
+
+.cycle-tab-item:after {
+  display:block;
+  content: '';
+  border-bottom: solid 3px orange;  
+  transform: scaleX(0);  
+  transition: transform 0ms ease-out;
+}
+.cycle-tab-item.active:after { 
+  transform: scaleX(1);
+  transform-origin:  0% 50%; 
+  transition: transform 5000ms ease-in;
+}
+
+
+.nav-link:focus,
+.nav-link:hover,
+.cycle-tab-item.active a {
+  border-color: transparent !important;
+  color: orange;
+}
+
+.bd {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.profile-user-info {
+  display: table;
+  width: 98%;
+  width: calc(100% - 24px);
+  margin: 0 auto;
+  font-size: 14px;
+}
+
+.font-order {
+  font-size: 14px;
+}
+
+.profile-info-row {
+  display: table-row
+}
+
+.profile-info-name,
+.profile-info-value {
+  display: table-cell;
+  border-top: 1px dotted #D5E4F1,
+}
+
+.profile-info-value {
+  text-align: left;
+}
+
+.profile-info-name {
+  text-align: left;
+  font-weight: bold !important;
+  padding: 6px 10px 6px 4px;
+  font-weight: 400;
+  color: #343a40;
+  background-color: transparent;
+  width: 200px;
+  vertical-align: middle
+}
+.fix {
+  padding: 5px 20px 5px 30px
+}
+
+.profile-info-value {
+  padding: 6px 4px 6px 6px
+}
+
+.profile-info-value>span+span:before {
+  display: inline;
+  content: ",";
+  margin-left: 1px;
+  margin-right: 3px;
+  color: #666;
+  border-bottom: 1px solid #FFF
+}
+
+.profile-info-value>span+span.editable-container:before {
+  display: none
+}
+
+.profile-info-row:first-child .profile-info-name,
+.profile-info-row:first-child .profile-info-value {
+  border-top: none
+}
+
+
+.item-order:hover {
+  background-color:rgb(162, 158, 170);
+  color:white
+}
+
+.btn-work {
+  width:200px;
+  background-color: #343a40;
+  color: white
+}
+
+.iconPer {
+  font-size: 30px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* The container */
+.customer-checkbox {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 15px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.customer-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.customer-checkbox:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.customer-checkbox input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.customer-checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.customer-checkbox .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.pd-checkbox {
+  padding: 5px;
+}
+
+.mg-btn {
+  margin: 5px !important;
+}

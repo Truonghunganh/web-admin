@@ -1,0 +1,60 @@
+<section class="row component-section">
+    <div class="col-md-9">
+      <div class="card-body">
+        <div *ngIf="service$ | async; then display else loading"></div>
+        <ng-template #display>
+          <form >
+            <div class="form-group" >
+              <label class="medium mb-1" for="inputEmailAddress" >Name</label>
+              <div ><input  name="service.name" [(ngModel)]="service.name " class="form-control py-4" id="inputEmailAddress" type="email" placeholder="Enter name service..."/></div>
+            </div>
+            <div class="form-group">
+              <label class="medium mb-1" for="inputPassword">Description</label>
+              <textarea required  name="service.description" [(ngModel)]="service.description" class="form-control" placeholder="Enter description service..." style="height: 100px;"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="medium mb-1" for="inputEmailAddress">Price</label>
+              <input class="form-control py-4"  name="service.price" [(ngModel)]="service.price" id="inputEmailAddress" type="email" placeholder="Enter price service..."/>
+            </div>
+            <div class="form-group">
+                <label class="medium mb-1" for="inputEmailAddress">Image</label>
+                <div *ngIf="(service).image"><img src='{{url+"/"+(service)?.image?.url}}' style="width: 300px;"></div>
+                <div *ngIf="!(service).image">
+                  <img class="profile_img"  src="../../../../assets/img/avatar.jpg"alt="">
+                </div>
+            </div>
+            <div class="form-group">
+              <label class="medium mb-1" for="file-input">File input</label>
+              <file-pond #myPond
+            [options]="pondOptions" 
+            [files]="pondFiles"
+            (oninit)="pondHandleInit()"
+            (change)="pondHandleAddFile($event)">
+            
+              </file-pond>
+            </div>
+            
+            <button type="button" class="btn btn-dark margin-button" routerLink="/services/list/{{categoryId}}">Cancel</button>
+            <button type="button" class="btn btn-dark" (click)="updateService()">Updated Service</button>
+        </form>
+        </ng-template>
+        <ng-template #loading>
+          <div class="spinner">
+              <div class="ball-1"></div>
+              <div class="ball-2"></div>
+          </div>
+      </ng-template>
+    
+    </div>
+    </div>
+    <div class="col-md-3">
+      <div id="basic">
+        <h2>Detail</h2>
+      </div>
+      <p> <code>1.Name</code> Name of category, example: Heart</p>
+      <p> <code>2.Description</code> Description of service</p>
+      <p> <code>3.Category</code> Services belong to category</p>
+      <p> <code>4.File upload</code> Image of service</p>
+    </div>
+    
+  </section>

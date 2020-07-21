@@ -1,0 +1,40 @@
+<section class="row component-section">
+    <div class="col-md-9">
+      <div class="card-body">
+        <form>
+            <div class="form-group">
+              <label class="medium mb-1" for="inputEmailAddress">Name</label>
+              <input class="form-control py-4" #name placeholder="Enter name promotion..."/>
+            </div>
+        
+            <div class="form-group">
+              <label class="medium mb-1" for="inputPassword">Start Date</label>
+              <div><input type="date" #start_date class="form-control py-4" /></div>
+            </div>
+
+            <div class="form-group">
+                <label class="medium mb-1" for="inputPassword">End Date</label>
+                <div><input class="form-control py-4" type="date" #end_date  /></div>
+            </div>
+  
+            <div class="form-group">
+                <label class="medium mb-1" for="inputEmailAddress">Discount</label>
+                <input class="form-control py-4" #discount placeholder="Enter name promotion..."/>
+            </div>
+                
+            <button type="button" class="btn btn-dark margin-button" routerLink="/promotions/list">Cancel</button>
+            <button type="button" class="btn btn-dark" (click)="addPromotion(name.value,start_date.value,end_date.value,discount.value)" >Seva</button>
+        </form>
+    </div>
+</div>
+    <div class="col-md-3">
+      <div id="basic">
+        <h2>Detail</h2>
+      </div>
+      <p> <code>1.Name</code> Name of promotion, example: Heart</p>
+      <p> <code>2.Start date</code> Start date of promotion</p>
+      <p> <code>3.End date</code> End date of promotion</p>
+      <p> <code>3.Discount</code> Discount of promotion</p>
+    </div>
+    
+</section>

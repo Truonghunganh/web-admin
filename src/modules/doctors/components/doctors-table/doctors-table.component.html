@@ -1,0 +1,71 @@
+<sb-card>
+    <div class="card-header">
+        <div class="row">
+            <label><fa-icon class="mr-1" [icon]='["fas", "table"]'></fa-icon> List all doctor</label>
+            <button type="button" class="btn btn-dark btn-add" (click)="getCategories()" routerLink="/doctors/approve">Approve new doctors</button>  
+        </div>
+    </div>
+  <div class="card-body"> 
+    <div *ngIf="doctors$ |async; then display; else loading"></div>
+    <ng-template #display>
+        <table class="table table-striped"> 
+            <thead>
+                <tr> 
+                    <th scope="col">ID</th>
+                    <th scope="col" sbSortable="name" (sort)="onSort($event)"><span>Avatar</span></th>
+                    <th scope="col" sbSortable="name" (sort)="onSort($event)"><span>Name</span></th>
+                    <th scope="col" sbSortable="area" (sort)="onSort($event)"><span>Phone</span></th>
+                    <th scope="col" sbSortable="area" (sort)="onSort($event)"><span>Birthday</span></th>
+                    <th scope="col" sbSortable="area" (sort)="onSort($event)"><span>Categories</span></th>
+                    <th scope="col" sbSortable="area" (sort)="onSort($event)"><span>Total orders</span></th>
+                    <th scope="col" sbSortable="area" (sort)="onSort($event)"><span>Status</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let doctor of (doctors$ |async).users" (click)="navigaDetail(doctor.id)" class="item-order">
+                    <th scope="row">{{doctor.id}}</th>
+                    <div *ngIf="doctor.avatar">
+                        <td><img src="{{url + '/' + doctor.avatar.url}}" class="image-avatar-list"></td>
+                    </div>
+                    <div *ngIf="!doctor.avatar">
+                    <td><img src="../../../../assets/img/avatar.jpg" class="image-avatar-list"></td>
+                    </div>
+                    <th style="color: rgb(50, 47, 85);">{{doctor.full_name}}</th>
+                    <td>{{doctor.phone}}</td>
+                    <div *ngIf="doctor.birthday; then displayBirthday; else noBirthday"></div>
+                    <ng-template #displayBirthday><td>{{doctor.birthday | date:'dd/MM/yyyy'}}</td></ng-template>
+                    <ng-template #noBirthday><td>NAN</td></ng-template>
+                    <div *ngIf="doctor.categories; then displayCategory; else noCategory"></div>
+                    <ng-template #displayCategory>
+                        <td><p *ngFor="let category of doctor.categories"> - {{category.name}}</p></td>
+                    </ng-template>
+                    <ng-template #noCategory>
+                        <td><p>NULL</p></td>
+                    </ng-template>
+                    <td><strong>{{doctor.doctor_orders_count}}</strong></td>
+                    <div *ngIf="doctor.status == 1; then displayStatus; else noStatus"></div>
+                    <ng-template #displayStatus>
+                        <td>
+                            <input type="checkbox" disabled="true" id="switch" checked/><label id="status" class="text-top" for="switch"></label>
+                        </td>
+                    </ng-template>
+                    <ng-template #noStatus>
+                        <td>
+                            <input type="checkbox" disabled="true" id="switch"/><label id="status" class="text-top" for="switch"></label>
+                        </td>
+                    </ng-template>
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-center">
+            <!-- <ngb-pagination [collectionSize]="pageSize*(doctors$ | async).pagination['total_page']" [(page)]="page" size="sm" [pageSize]="pageSize" (pageChange)="onPageChange(page)"></ngb-pagination> -->
+        </div>
+    </ng-template>
+    <ng-template #loading>
+        <div class="spinner">
+            <div class="ball-1"></div>
+            <div class="ball-2"></div>
+        </div>
+    </ng-template>
+
+  </div>
+</sb-card>

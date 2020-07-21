@@ -1,0 +1,69 @@
+<div class="row">
+  <div class="col-lg-3">
+    <div class="card text-white mb-1 bg-primary">
+      <div class="card-body">
+        <div>Total customers:</div>
+       <div *ngIf="customerData$ | async; then displayCustomer; else loading"> </div>
+        <ng-template #displayCustomer>
+          <h2 class="font-weight-bold" >{{customerData$ | async}}</h2>
+        </ng-template>
+        <ng-template #loading><h3>Loading...</h3></ng-template>
+      </div>
+      <div class="card-footer d-flex align-items-center justify-content-between">
+          <a class="small text-white stretched-link" routerLink="/customers">View Details</a>
+          <div class="small text-white"><fa-icon [icon]='["fas", "angle-right"]'></fa-icon></div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-lg-3">
+    <div class="card text-white mb-1 bg-warning">
+      <div class="card-body">
+        <div>Total doctors:</div>
+        <div *ngIf="doctorData$ | async; then displayDoctor; else loading"> </div>
+        <ng-template #displayDoctor>
+          <h2 class="font-weight-bold">{{doctorData$ | async}}</h2>
+        </ng-template>
+        <ng-template #loading><h3>Loading...</h3></ng-template>
+      </div>
+      <div class="card-footer d-flex align-items-center justify-content-between">
+          <a class="small text-white stretched-link" routerLink="/doctors">View Details</a>
+          <div class="small text-white"><fa-icon [icon]='["fas", "angle-right"]'></fa-icon></div>
+      </div>
+    </div>  
+  </div>
+
+  <div class="col-lg-3">
+    <div class="card text-white mb-1 bg-success">
+      <div class="card-body">
+        <div>Total services:</div>
+        <div *ngIf="serviceData$ | async; then displayService; else loading"> </div>
+        <ng-template #displayService>
+          <h2 class="font-weight-bold">{{serviceData$ | async}}</h2>
+        </ng-template>
+        <ng-template #loading><h3>Loading...</h3></ng-template>
+      </div>
+      <div class="card-footer d-flex align-items-center justify-content-between">
+          <a class="small text-white stretched-link" routerLink="/services">View Details</a>
+          <div class="small text-white"><fa-icon [icon]='["fas", "angle-right"]'></fa-icon></div>
+      </div>
+    </div>  
+  </div>
+  
+  <div class="col-lg-3">
+    <div class="card text-white bg-danger">
+      <div class="card-body">
+        <div>Total categories:</div>
+        <div *ngIf="categoryData$ | async; then displayCategory; else loading"> </div>
+        <ng-template #displayCategory>
+          <h2 class="font-weight-bold" >{{categoryData$ | async}}</h2>
+        </ng-template>
+        <ng-template #loading><h3>Loading...</h3></ng-template>
+      </div>
+      <div class="card-footer d-flex align-items-center justify-content-between">
+          <a class="small text-white stretched-link" routerLink="/categories">View Details</a>
+          <div class="small text-white"><fa-icon [icon]='["fas", "angle-right"]'></fa-icon></div>
+      </div>
+    </div>
+  </div>
+</div>

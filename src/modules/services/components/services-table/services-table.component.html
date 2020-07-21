@@ -1,0 +1,70 @@
+<sb-card>
+  <div class="card-header">
+    <div class="row">
+        <label><fa-icon class="mr-1" [icon]='["fas", "table"]'></fa-icon>List all services by category</label>
+    </div>
+  </div>
+  <div class="card-body"> 
+            <div class="row margin-bottom-div">
+                <div class="col-md-2">
+                    <label class="medium mb-1" for="inputPassword">Category:</label>
+                </div>
+                <div class="col-md-6">
+                    <select class="form-control" (change)="onChangeCategory($event.target.value)">
+                        <option *ngFor="let category of categories$ | async" value="{{category.id}}" [selected]="category.id == categoryId">{{category.name}}</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-dark" routerLink="{{'/services/add/'+categoryId+ '/' + categoryName}}">Add new service</button>
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-dark" routerLink="/categories">Back</button>
+                </div>
+            </div>
+        <div *ngIf="services$ | async; then display else loading"></div>
+            <ng-template #display>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col" style="text-align:center" sbSortable="area" (sort)="onSort($event)"><span>Name</span></th>
+                            <th scope="col" style="text-align:center" sbSortable="area" (sort)="onSort($event)"><span>Description</span></th>
+                            <th scope="col" style="text-align:center" sbSortable="area" (sort)="onSort($event)"><span>Price</span></th>
+                            <th scope="col" style="text-align:center" sbSortable="area" (sort)="onSort($event)"><span>Image</span></th>
+                            <th>Actions</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>  
+                        <tr *ngFor="let service of services$ | async">
+                            <th scope="col">{{ service.id }}</th>
+                            <td scope="col" style="text-align:center">{{service.name}}</td>
+                            <td scope="col" style="text-align:center" >{{service.description}}</td>
+                            <td scope="col" style="text-align:center">{{service.price}}</td>
+                            <td><img src="{{url+ '/' + service.image.url}}" class="image"></td>
+                            <td class="pmd-table-row-action">
+                                <a class="icon" routerLink='/services/update/{{categoryId}}/{{service.id}}' routerLinkActive='active'><fa-icon class="mr-1" [icon]='["fas", "edit"]'></fa-icon></a>
+                                <a class="icon" (click)="deleteService(service.id)" routerLinkActive='active'><fa-icon class="mr-1" [icon]='["fas", "trash"]'></fa-icon></a>					
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row" >
+                    <div class="col-sm-0">
+                        <button (click)="previousPage()">Previous</button>
+                    </div>
+                    <div><h3>{{page}}</h3></div>
+                    <div class="col-sm-0 text-right">
+                        <button (click)="nextPage()">Next</button>
+                    </div>
+                </div>
+            
+            </ng-template>
+            <ng-template #loading>
+                <div class="spinner">
+                    <div class="ball-1"></div>
+                    <div class="ball-2"></div>
+                </div>
+            </ng-template>
+    </div>
+</sb-card>

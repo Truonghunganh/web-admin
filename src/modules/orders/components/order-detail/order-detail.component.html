@@ -1,0 +1,314 @@
+<sb-card>
+  <div class="card-body">
+    <div *ngIf="orderDetail; then display; else loading"></div>
+     <ng-template #display>
+      <div class="row ">
+        <div class="col-md-5">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <strong>Customer Info</strong>
+              </h5>
+            </div>
+            <div class="card-body"> 
+              <div class="card-header bg-transparent text-center">
+                <div *ngIf="orderDetail.customer.avatar">
+                  <img class="customer-detail-img"  src="{{url + '/' + orderDetail.customer.avatar.url}}" alt="">
+                </div>
+                <div *ngIf="!orderDetail.customer.avatar">
+                  <img class="customer-detail-img"  src="../../../../assets/img/avatar.jpg"alt="">
+                </div>
+              </div>
+              <div class="card-body" >
+                  <div class="profile-user-info font-order">
+                    <div class="profile-info-row">
+                      <div class="profile-info-name fix"> Fullname </div>
+    
+                      <div class="profile-info-value fix">
+                        <span>{{orderDetail.customer.full_name}}</span>
+                      </div>
+                    </div>
+    
+                    <div class="profile-info-row">
+                      <div class="profile-info-name fix"> Phone </div>
+    
+                      <div class="profile-info-value fix">
+                        <span>{{orderDetail.customer.phone}}</span>
+                      </div>
+                    </div>
+    
+                    <div class="profile-info-row">
+                      <div class="profile-info-name fix"> Birthday </div>
+    
+                      <div class="profile-info-value fix">
+                        <span>{{orderDetail.customer.birthday | date: 'dd/MM/yyyy'}}</span>
+                      </div>
+                    </div>
+  
+                    <div class="profile-info-row">
+                      <div class="profile-info-name fix"> Status </div>
+    
+                      <div class="profile-info-value fix" >
+                        <div *ngIf="orderDetail.customer.status == 1">
+                         <input type="checkbox" disabled="true" id="switch" checked/><label id="status" class="text-top" for="switch"></label>
+                        </div>
+                        <div *ngIf="orderDetail.customer.status != 1">
+                          <input type="checkbox" disabled="true" id="switch"/><label id="status" class="text-top" for="switch"></label>
+                         </div>
+                        
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div *ngIf='orderDetail.doctor_id; then displayDoctor'></div>
+          <ng-template #displayDoctor>
+            <div class="card">
+              <div class="card-header">
+                <h5 class="mb-0">
+                  <strong>Doctor Info</strong>
+                </h5>
+              </div>
+              <div class="card-body">
+                <div class="card-header bg-transparent text-center">
+                  <div *ngIf="orderDetail.doctor.avatar">
+                    <img class="customer-detail-img"  src="{{url + '/' + orderDetail.doctor.avatar.url}}" alt="">
+                  </div>
+                  <div *ngIf="!orderDetail.doctor.avatar">
+                    <img class="customer-detail-img"  src="../../../../assets/img/avatar.jpg"alt="">
+                  </div>
+              </div>
+              <div class="card-body" >
+                  <div class="profile-user-info font-order">
+                    <div class="profile-info-row">
+                      <div class="profile-info-name fix"> Fullname </div>
+    
+                      <div class="profile-info-value fix">
+                        <span>{{orderDetail.doctor.full_name}}</span>
+                      </div>
+                    </div>
+    
+                    <div class="profile-info-row">
+                      <div class="profile-info-name fix"> Phone </div>
+    
+                      <div class="profile-info-value fix">
+                        <span>{{orderDetail.doctor.phone}}</span>
+                      </div>
+                    </div>
+    
+                    <div class="profile-info-row">
+                      <div class="profile-info-name fix"> Birthday </div>
+    
+                      <div class="profile-info-value fix">
+                        <span>{{orderDetail.doctor.birthday | date:'short'}}</span>
+                      </div>
+                    </div>
+    
+                    <div class="profile-info-row">
+                      <div class="profile-info-name fix"> Status </div>
+    
+                      <div class="profile-info-value fix" >
+                        <div *ngIf="orderDetail.doctor.status == 1">
+                          <input type="checkbox" disabled="true" id="switch" checked/><label id="status" class="text-top" for="switch"></label>
+                         </div>
+                         <div *ngIf="orderDetail.doctor.status != 1">
+                           <input type="checkbox" disabled="true" id="switch"/><label id="status" class="text-top" for="switch"></label>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              </div>
+            </div>
+          </ng-template>
+        </div>      
+        <div class="col-md-7">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <strong>Order Info Detail</strong>
+              </h5>
+            </div>
+  
+            <div class="card-body">
+              <div class="profile-user-info font-order">
+                <div class="profile-info-row">
+                  <div class="profile-info-name fix">Address </div>
+  
+                  <div class="profile-info-value fix">
+                    <span><fa-icon class="mr-4" [icon]='["fas", "map-marker-alt"]'></fa-icon>{{orderDetail.address}}</span>
+                  </div>
+                </div>
+
+                <div class="profile-info-row">
+                  <div class="profile-info-name fix">Status </div>
+  
+                  <div class="profile-info-value fix">
+                    <div [ngSwitch]="orderDetail.status">
+                      <div *ngSwitchCase="1"> 
+                        <span class="badge badge-success">Pending</span>
+                      </div>
+                      <div *ngSwitchCase="2"> 
+                        <span class="badge badge-primary">Confirmed</span>
+                      </div>
+                      <div *ngSwitchCase="3"> 
+                        <span class="badge badge-warning">Customer-Cancel</span>
+                      </div>
+                      <div *ngSwitchCase="4"> 
+                        <span class="badge badge-danger">Doctor-Cancel</span>
+                      </div>
+                      <div *ngSwitchCase="5"> 
+                        <span class="badge badge-secondary">Processing</span>
+                      </div>
+                      <div *ngSwitchCase="6"> 
+                        <span class="badge badge-success">Done</span>
+                      </div>
+                    </div>
+                </div>
+                </div>
+  
+                <div class="profile-info-row">
+                  <div class="profile-info-name fix">StartTime </div>
+  
+                  <div class="profile-info-value fix">
+                    <span>{{orderDetail.start_time | date:'medium'}}</span>
+                  </div>
+                </div>
+  
+                <div class="profile-info-row">
+                  <div class="profile-info-name fix"> EndTime </div>
+  
+                  <div class="profile-info-value fix">
+                    <span>{{orderDetail.end_time | date:'medium'}}</span>
+                  </div>
+                </div>
+  
+                <div class="profile-info-row">
+                  <div class="profile-info-name fix"> Latituade </div>
+  
+                  <div class="profile-info-value fix">
+                    <span>{{orderDetail.lat}}</span>
+                  </div>
+                </div>
+  
+                <div class="profile-info-row">
+                  <div class="profile-info-name fix"> Longitude </div>
+  
+                  <div class="profile-info-value fix">
+                    <span>{{orderDetail.lng}}</span>
+                  </div>
+                </div>
+  
+                <div class="profile-info-row">
+                  <div class="profile-info-name fix"> Note </div>
+  
+                  <div class="profile-info-value fix">
+                    <span>{{orderDetail.note}}</span>
+                  </div>
+                </div>
+  
+                <div class="profile-info-row">
+                  <div class="profile-info-name fix"> Pay Card Id </div>
+  
+                  <div class="profile-info-value fix">
+                    <span>{{orderDetail.pay_card_id}}</span>
+                  </div>
+                </div>
+                <div *ngIf="orderDetail.promotion_idl then displayPromotion"></div>
+                <ng-template #displayPromotion>
+                  <div class="profile-info-row">
+                    <div class="profile-info-name fix"> Promotion Name </div>
+    
+                    <div class="profile-info-value fix">
+                      <span>{{orderDetail.promotion.name}}</span>
+                    </div>
+                  </div>
+  
+                  <div class="profile-info-row">
+                    <div class="profile-info-name fix"> Promotion Discount </div>
+    
+                    <div class="profile-info-value fix">
+                      <span>{{orderDetail.promotion.discount | percent}}</span>
+                    </div>
+                  </div>
+                </ng-template>
+                <div class="profile-info-row">
+                  <div class="profile-info-name fix"> Price Origin </div>
+  
+                  <div class="profile-info-value fix">
+                    <span><strong>{{orderDetail.original_price | currency}}</strong></span>
+                  </div>
+                </div>
+  
+                <div class="profile-info-row">
+                  <div class="profile-info-name fix"> Total to pay </div>
+  
+                  <div class="profile-info-value fix">
+                    <span><strong>{{orderDetail.total | currency}}</strong></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <strong>Service Info</strong>
+              </h5>
+            </div>
+  
+            <div class="card-body" >
+              <div class="profile-user-info font-order">
+                <div class="profile-info-row">
+                  <div class="profile-info-name fix"> Name </div>
+  
+                  <div class="profile-info-value fix">
+                    <span>{{orderDetail.service.name}}</span>
+                  </div>
+                </div>
+  
+                <div class="profile-info-row">
+                  <div class="profile-info-name fix"> Description </div>
+  
+                  <div class="profile-info-value fix">
+                    <span>{{orderDetail.service.description}}</span>
+                  </div>
+                </div>
+  
+                <div class="profile-info-row">
+                  <div class="profile-info-name fix"> Price service </div>
+  
+                  <div class="profile-info-value fix">
+                    <span>{{orderDetail.service.price | currency}}</span>
+                  </div>
+                </div>
+  
+                <div class="profile-info-row">
+                  <div class="profile-info-name fix"> Image </div>
+  
+                  <div class="profile-info-value fix">
+                    <img src="{{url + '/' + orderDetail.service.image.url}}" style="width: 400px;height: 270px;">
+                  </div>
+                </div>
+              </div>
+            </div>  
+          </div>
+          
+        </div>
+      </div>
+      <br>
+      <div style="text-align: center">
+        <button class="btn btn-work" routerLink="/orders">Back</button>
+      </div>
+    </ng-template>
+    <ng-template #loading>
+      <div class="spinner">
+        <div class="ball-1"></div>
+        <div class="ball-2"></div>
+    </div>
+    </ng-template>
+  </div>
+</sb-card>

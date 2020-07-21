@@ -1,0 +1,53 @@
+<sb-card>
+    <div class="card-header">
+        <div class="row">
+            <label><fa-icon class="mr-1" [icon]='["fas", "table"]'></fa-icon>List all categories</label>
+            <button type="button" class="btn btn-dark btn-add"  routerLink="/categories/add">Add new category</button>  
+        </div>
+    </div>
+    <div class="card-body"> 
+       <div *ngIf="categories$ | async; then display; else loading"> </div>
+            <ng-template #display>
+                <table class="table table-striped"> 
+                    <thead>
+                        <tr> 
+                            <th scope="col" style="text-align:center">ID</th>
+                            <th scope="col" style="text-align:center" sbSortable="name" (sort)="onSort($event)"><span>Name</span></th>
+                            <th scope="col" style="text-align:center" sbSortable="area" (sort)="onSort($event)"><span>Description</span></th>
+                            <th scope="col" style="text-align:center" sbSortable="area" (sort)="onSort($event)"><span>Image</span></th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let category of categories$ | async" (click)="navigaDetail(category.id)" class="item-order" >
+                            <th style="text-align:center" scope="row">{{category.id }}</th>
+                            <td style="text-align:center" scope="row" >{{category.name}}</td>
+                            <td style="text-align:center" scope="row" >{{category.description}}</td>
+                            <td style="text-align:center"  *ngIf="category.image" ><img src="{{url+ '/' + category.image.url}}" class="image"></td>
+
+                            <td class="pmd-table-row-action" style="text-align:center">
+                                <a class="icon" routerLink='/categories/repair/{{category.id}}' ><fa-icon class="mr-4" [icon]='["fas", "edit"]'></fa-icon></a>
+                                <a class="icon" (click)="deleteCategory(category.id)" ><fa-icon class="mr-1" [icon]='["fas", "trash"]'></fa-icon></a>					
+                            </td>
+                    </tbody>
+                </table>
+                <div class="d-flex justify-content-center">
+                    <div class="row" >
+                        <div class="col-sm-0">
+                            <button (click)="previousPage()">Previous</button>
+                        </div>
+                        <div><h3>{{page}}</h3></div>
+                        <div class="col-sm-0 text-right">
+                            <button (click)="nextPage()">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template #loading>
+                <div class="spinner">
+                    <div class="ball-1"></div>
+                    <div class="ball-2"></div>
+                </div>
+            </ng-template>
+    </div>
+</sb-card>

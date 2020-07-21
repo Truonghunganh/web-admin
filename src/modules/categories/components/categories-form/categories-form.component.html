@@ -1,0 +1,36 @@
+<section class="row component-section">
+  <div class="col-md-9">
+    <div class="card-body">
+      <form>
+          <div class="form-group">
+            <label class="medium mb-1" for="inputEmailAddress">Name</label>
+            <input class="form-control py-4" #name  type="email" placeholder="Enter name category..."/></div>
+          <div class="form-group">
+            <label class="medium mb-1" for="inputPassword">Description</label>
+            <textarea required class="form-control" #description placeholder="Enter description category..." style="height: 100px;"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="medium mb-1" for="file-input">File input</label>
+         
+            <file-pond #myPond 
+            
+            [options]="pondOptions"
+            (oninit)="pondHandleInit()"
+            (change)="pondHandleAddFile($event)">
+            </file-pond>
+          </div>
+          <button type="button" class="btn btn-dark margin-button" routerLink="/categories/list">Cancel</button>
+          <button type="button" class="btn btn-dark" (click)="addCategory(name.value,description.value)" >Add</button>
+      </form>
+  </div>
+  </div>
+  <div class="col-md-3">
+    <div id="basic">
+      <h2>Detail</h2>
+    </div>
+    <p> <code>1.Name</code> Name of category, example: Heart</p>
+    <p> <code>2.Description</code> Description of category</p>
+    <p> <code>3.File upload</code> Image of category</p>
+  </div>
+  
+</section>

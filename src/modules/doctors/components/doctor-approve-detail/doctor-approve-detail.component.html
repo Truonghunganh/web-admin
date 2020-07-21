@@ -1,0 +1,201 @@
+<sb-card>
+  <div class="card-body">
+    <div *ngIf="doctorApproveDetail; then display; else loading"></div>
+     <ng-template #display>
+      <div class="student-profile py-4">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="card shadow-sm">
+                <div class="card-header bg-transparent text-center">
+                  <div *ngIf="(doctorApproveDetail).avatar">
+                    <img class="profile_img"  src="{{url + '/' + (doctorApproveDetail).avatar.url}}" alt="">
+                  </div>
+                  <div *ngIf="!(doctorApproveDetail).avatar">
+                    <img class="profile_img"  src="../../../../assets/img/avatar.jpg"alt="">
+                  </div>
+                </div>
+                <div class="card-body" class="text-center">
+                    <a class="icon" routerLink="{{'/doctors/edit/' + (doctorApproveDetail).id}}" ><fa-icon class="mr-4" [icon]='["fas", "edit"]'></fa-icon></a>
+                    <a class="icon" routerLink="{{'/doctors/delete/' + (doctorApproveDetail).id}}" ><fa-icon class="mr-1" [icon]='["fas", "trash"]'></fa-icon></a>	
+                    <hr>
+                    <div class="profile-user-info">
+                    <div class="profile-info-row">
+                      <div class="profile-info-name fix"> Fullname </div>
+    
+                      <div class="profile-info-value fix">
+                        <span>{{(doctorApproveDetail).full_name}}</span>
+                      </div>
+                    </div>
+ 
+                    <div class="profile-info-row">
+                      <div class="profile-info-name fix"> Phone </div>
+    
+                      <div class="profile-info-value fix">
+                        <span>{{(doctorApproveDetail).phone}}</span>
+                      </div>
+                    </div>
+                      
+                    <div class="profile-info-row">
+                      <div class="profile-info-name fix"> Birthday </div>
+    
+                      <div class="profile-info-value fix">
+                        <span>{{(doctorApproveDetail).birthday}}</span>
+                      </div>
+                    </div>
+  
+                    <div class="profile-info-row">
+                      <div class="profile-info-name fix"> Role </div>
+    
+                      <div class="profile-info-value fix">
+                        <span>{{(doctorApproveDetail).role.name}}</span>
+                      </div>
+                    </div>
+   
+                    <div *ngIf="(doctorApproveDetail).status == 1; then displayStatus; else noStatus"></div>
+                    <ng-template #displayStatus>
+                      <div class="profile-info-row">
+                        <div class="profile-info-name fix"> Status </div>
+      
+                        <div class="profile-info-value fix" >
+                          
+                            <input type="checkbox" disabled="true" id="switch" checked/><label id="status" class="text-top" for="switch"></label>
+                          
+                        </div>
+                      </div>
+                    </ng-template>
+                    <ng-template #noStatus>
+                      <div class="profile-info-row">
+                        <div class="profile-info-name fix"> Status </div>
+      
+                        <div class="profile-info-value fix" >
+                            <input type="checkbox" disabled="true" id="switch"/><label id="status" class="text-top" for="switch"></label>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-8 bd">
+              <ul class="nav nav-tabs">
+                <li class="cycle-tab-item active">
+                  <a class="nav-link" role="tab" data-toggle="tab" href="#home">Doctor-infor</a>
+                </li>
+                <li class="cycle-tab-item"> 
+                  <a class="nav-link" role="tab" data-toggle="tab" href="#profile">Categories</a>
+                </li>
+                <li class="cycle-tab-item">
+                  <a class="nav-link" role="tab" data-toggle="tab" href="#messages">Certifications</a>
+                </li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane fade active in" id="home" role="tabpanel" aria-labelledby="home-tab">
+                  <div class="profile-user-info">
+                    <div class="profile-info-row">
+                      <div class="profile-info-name"> Latitude </div>
+                      <div class="profile-info-value">
+                        <span>{{(doctorApproveDetail).doctor_info.lat}}</span>
+                      </div>
+                    </div>
+  
+                    <div class="profile-info-row">
+                      <div class="profile-info-name"> Longitude </div>
+                      <div class="profile-info-value">
+                        <span>{{(doctorApproveDetail).doctor_info.lng}}</span>
+                      </div>
+                    </div>
+                    
+                    <div class="profile-info-row">
+                      <div class="profile-info-name">Address</div>
+                      <div class="profile-info-value">
+                        <fa-icon class="mr-1" [icon]='["fas", "map-marker-alt"]'></fa-icon>
+                        <span>{{(doctorApproveDetail).doctor_info.address}}</span>
+                      </div>
+                    </div>
+       
+                    <div class="profile-info-row">
+                      <div class="profile-info-name"> Balance </div>
+                      <div class="profile-info-value">
+                        <span>{{(doctorApproveDetail).doctor_info.balance}}</span>
+                      </div>
+                    </div>
+                  </div>  
+                </div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                  <div *ngIf="doctorApproveDetail.categories; then displayCategory; else loading"> </div>
+                  <ng-template #displayCategory>
+                      <table class="table table-striped"> 
+                          <thead>
+                              <tr> 
+                                  <th scope="col">ID</th>
+                                  <th scope="col" sbSortable="name" (sort)="onSort($event)"><span>Name</span></th>
+                                  <th scope="col" sbSortable="area" (sort)="onSort($event)"><span>Description</span></th>
+                                  <th scope="col" sbSortable="area" (sort)="onSort($event)"><span>Image</span></th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr *ngFor="let category of (doctorApproveDetail).categories">
+                                  <th scope="row">{{category.id }}</th>
+                                  <td>{{category.name}}</td>
+                                  <td style = "text-align: justify;">{{category.description}}</td>
+                                  <td><img src="{{url +'/' + category.image.url}}" class="image"></td>
+                          </tbody>
+                      </table>    
+                  </ng-template>
+                  <ng-template #loading>
+                      <div class="spinner">
+                          <div class="ball-1"></div>
+                          <div class="ball-2"></div>
+                      </div>
+                  </ng-template>
+                </div>
+                <div class="tab-pane fade" id="messages" role="tabpanel" aria-labelledby="messages-tab">
+                  <div *ngIf="(doctorApproveDetail).doctor_info.certifications; then displayCertification; else loading"> </div>
+                  <ng-template #displayCertification>
+                      <table class="table table-striped"> 
+                          <thead>
+                              <tr> 
+                                  <th scope="col">ID</th>
+                                  <th scope="col" sbSortable="name" (sort)="onSort($event)"><span>Title</span></th>
+                                  <th scope="col" sbSortable="area" (sort)="onSort($event)"><span>Expired</span></th>
+                                  <th scope="col" sbSortable="area" (sort)="onSort($event)"><span>File</span></th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr *ngFor="let certificate of (doctorApproveDetail).doctor_info.certifications">
+                                  <th scope="row">{{certificate.id}}</th>
+                                  <td>{{certificate.title}}</td>
+                                  <th scope="row">{{certificate.expire_at | date: 'dd/mm/yyyy'}}</th>
+                                  <td>
+                                    <p *ngFor="let file of certificate.files"><a href="{{url + '/' + file.url}}">more</a></p>
+                                  </td>
+                          </tbody>
+                      </table>    
+                  </ng-template>
+                  <ng-template #loading>
+                      <div class="spinner">
+                          <div class="ball-1"></div>
+                          <div class="ball-2"></div>
+                      </div>
+                  </ng-template>
+                </div> 
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div style="text-align: center;">
+          <button type="button" class="btn btn-warning m-lg-3" (click)=submitApprove(doctorApproveDetail.id)>Approve</button>
+          <button type="button" class="btn btn-danger" routerLink="/doctors/approve">Reject</button>
+        </div>
+      </div>
+     </ng-template>
+     <ng-template #loading>
+      <div class="spinner">
+        <div class="ball-1"></div>
+        <div class="ball-2"></div>
+      </div>
+    </ng-template>
+  </div>
+</sb-card>

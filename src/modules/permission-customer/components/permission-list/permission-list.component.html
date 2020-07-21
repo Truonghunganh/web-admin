@@ -1,0 +1,59 @@
+<sb-card>
+  <div class="card-header">
+    <div class="row">
+      <div class="col-md-6" style="text-align: center">
+        <button type="button" class="btn btn-primary" (click)="addAll()">Add new permissions for all Admin</button>
+      </div>
+      <div class="col-md-6" style="text-align: center">
+        <button type="button" class="btn btn-danger" (click)="removeAll()">Remove permissions for all Admin</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <div *ngIf="customers; then display; else loading">
+    </div>
+    <ng-template #display>
+      <table class="table table-striped"> 
+        <thead>
+            <tr> 
+                <th scope="col">ID</th>
+                <th scope="col" sbSortable="name" (sort)="onSort($event)"><span>Avatar</span></th>
+                <th scope="col" sbSortable="name" (sort)="onSort($event)"><span>Name</span></th>
+                <th scope="col" sbSortable="name" (sort)="onSort($event)"><span>Phone</span></th>
+                <th scope="col" sbSortable="area" (sort)="onSort($event)" class="text-center"><span>Add new permissions</span></th>
+                <th scope="col" sbSortable="area" (sort)="onSort($event)" class="text-center"><span>Remove permissions</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let customer of customers.users">
+                <th scope="row">{{customer.id}}</th>
+                <div *ngIf="customer.avatar">
+                  <td><img src="{{url + '/' + customer.avatar.url}}" class="image-avatar-list"></td>
+                </div>
+                <div *ngIf="!customer.avatar">
+                  <td><img src="../../../../assets/img/avatar.jpg" class="image-avatar-list"></td>
+                </div>
+                <td>{{customer.full_name}}</td>
+                <td>{{customer.phone}}</td>
+                <td class="text-center">
+                  <a class="iconPer" routerLink="{{'/permission-customer/add/' + customer.id}}" ><fa-icon class="mr-4" [icon]='["fas", "plus-circle"]'></fa-icon></a>
+                </td>                
+                <td class="text-center">
+                  <a class="iconPer" routerLink="{{'/permission-customer/remove/' + customer.id}}" ><fa-icon class="mr-4" [icon]='["fas", "minus-circle"]'></fa-icon></a>
+                </td>                
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-center">
+        <ngb-pagination [collectionSize]="pageSize*customers.pagination['total_page']" [(page)]="page" size="sm" [pageSize]="pageSize" (pageChange)="onPageChange(page)"></ngb-pagination>
+    </div>
+    </ng-template>
+    <ng-template #loading>
+      <div class="spinner">
+          <div class="ball-1"></div>
+          <div class="ball-2"></div>
+      </div>
+  </ng-template>
+  </div>
+</sb-card>
+

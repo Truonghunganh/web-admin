@@ -1,0 +1,33 @@
+<section class="row component-section">
+  <div class="col-md-9">
+    <div class="card-body">
+      <form [formGroup]="pushForm" >
+          <div class="form-group">
+            <label class="medium mb-1">Title:</label>
+            <input class="form-control py-4" formControlName="title"  type="text" placeholder="Enter title..."/></div>
+          <div class="form-group">
+            <label class="medium mb-1" >Messages:</label>
+            <textarea required class="form-control" formControlName="message" placeholder="Enter messages..." style="height: 100px;"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="medium mb-1" for="inputPassword">Push for:</label>
+            <select formControlName="type" class="form-control">
+              <option [selected]="true">Select type user</option>
+              <option *ngFor="let type of USER_TYPES" value="{{type}}" >{{type}}</option>
+          </select>
+          </div>
+          <button type="button" class="btn btn-dark margin-button" routerLink="/dashboard">Back</button>
+          <button type="button" class="btn btn-dark" (click)="pushNotification()" >Push</button>
+      </form>
+  </div>
+  </div>
+  <div class="col-md-3">
+    <div id="basic">
+      <h2>Detail</h2>
+    </div>
+    <p> <code>1.Title</code> Title for messages</p>
+    <p> <code>2.Messages</code> Messages</p>
+    <p> <code>3.Push for</code> Select user type</p>
+  </div>
+  
+</section>
