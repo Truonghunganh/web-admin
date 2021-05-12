@@ -42,7 +42,7 @@
         "@ng-bootstrap/ng-bootstrap": "6.0.2",
         "@prettier/plugin-pug": "1.2.0",
         "angular-webstorage-service": "^1.0.2",
-        "chart.js": "2.9.3",
+        "chart.js": "2.9.4",
         "filepond": "^4.18.0",
         "filepond-plugin-file-validate-type": "^1.2.5",
         "filepond-plugin-image-exif-orientation": "^1.0.9",
